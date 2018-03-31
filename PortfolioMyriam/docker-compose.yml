@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  portfoliomyriam:
+    image: portfoliomyriam
+    build:
+      context: .
+      dockerfile: PortfolioMyriam/Dockerfile
