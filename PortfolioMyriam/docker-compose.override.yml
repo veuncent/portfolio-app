@@ -6,3 +6,19 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "80"
+
+  portfolio-db:
+    container_name: portfolio-db
+    image: mdillon/postgis:9.6
+    volumes:
+        - portfolio-postgres-data:/var/lib/postgresql/data
+        - portfolio-postgres-log:/var/log/postgresql
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - TZ=EST
+
+volumes:
+  portfolio-postgres-data:
+  portfolio-postgres-log:

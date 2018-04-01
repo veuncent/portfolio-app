@@ -2,7 +2,7 @@ version: '3'
 
 services:
   portfoliomyriam:
-    image: portfoliomyriam
+    image: vmeijer/portfolio-myriam
     build:
       context: .
       dockerfile: PortfolioMyriam/Dockerfile
