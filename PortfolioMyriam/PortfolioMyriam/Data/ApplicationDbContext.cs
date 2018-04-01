@@ -20,5 +20,6 @@ namespace PortfolioMyriam.Data
         }
 
         public DbSet<PortfolioItem> PortfolioItem { get; set; }
+        public DbSet<ExternalReference> ExternalReference { get; set; }
     }
 }
