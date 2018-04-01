@@ -1,4 +1,5 @@
-﻿@model PortfolioMyriam.Models.PortfolioItem
+﻿@model PortfolioMyriam.Models.PortfolioItemViewModel
+@using PortfolioMyriam.Models.Enums
 
 @{
     ViewData["Title"] = "Create";
@@ -24,8 +25,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="ExternalReference" class="control-label"></label>
-                <input asp-for="ExternalReference" class="form-control" />
-                <span asp-validation-for="ExternalReference" class="text-danger"></span>
+                <select asp-for="ExternalReference.ExternalReferenceType" asp-items="Html.GetEnumSelectList<ExternalReferenceType>()" class="form-control" style="margin-bottom: 5px;">
+                    <option selected="selected" value="">Select reference type</option>
+                </select>
+                <input asp-for="ExternalReference.Uri" class="form-control" />
+                <span asp-validation-for="ExternalReference.Uri" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

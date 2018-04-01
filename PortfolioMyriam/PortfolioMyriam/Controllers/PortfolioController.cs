@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PortfolioMyriam.Data;
 using PortfolioMyriam.Models;
@@ -22,7 +19,7 @@ namespace PortfolioMyriam.Controllers
         // GET: Portfolio
         public async Task<IActionResult> Index()
         {
-            return View(await _context.PortfolioItem.ToListAsync());
+            return View(await _context.PortfolioItem.Select(pi => pi.ToViewModel()).ToListAsync());
         }
 
         // GET: Portfolio/Details/5
@@ -34,19 +31,20 @@ namespace PortfolioMyriam.Controllers
             }
 
             var portfolioItem = await _context.PortfolioItem
+                .Include(pi => pi.ExternalReference)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (portfolioItem == null)
             {
                 return NotFound();
             }
 
-            return View(portfolioItem);
+            return View(portfolioItem.ToViewModel());
         }
 
         // GET: Portfolio/Create
         public IActionResult Create()
         {
-            return View();
+            return View(new PortfolioItemViewModel());
         }
 
         // POST: Portfolio/Create
@@ -54,15 +52,15 @@ namespace PortfolioMyriam.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,ExternalReference")] PortfolioItem portfolioItem)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description,ExternalReference")] PortfolioItemViewModel portfolioItemViewModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(portfolioItem);
+                _context.Add(portfolioItemViewModel.ToEntity());
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(portfolioItem);
+            return View(portfolioItemViewModel);
         }
 
         // GET: Portfolio/Edit/5
@@ -73,12 +71,15 @@ namespace PortfolioMyriam.Controllers
                 return NotFound();
             }
 
-            var portfolioItem = await _context.PortfolioItem.SingleOrDefaultAsync(m => m.Id == id);
+            var portfolioItem = await _context.PortfolioItem
+                .Include(pi => pi.ExternalReference)
+                .SingleOrDefaultAsync(m => m.Id == id);
+
             if (portfolioItem == null)
             {
                 return NotFound();
             }
-            return View(portfolioItem);
+            return View(portfolioItem.ToViewModel());
         }
 
         // POST: Portfolio/Edit/5
@@ -86,9 +87,9 @@ namespace PortfolioMyriam.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,ExternalReference")] PortfolioItem portfolioItem)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,ExternalReference")] PortfolioItemViewModel portfolioItemViewModel)
         {
-            if (id != portfolioItem.Id)
+            if (id != portfolioItemViewModel.Id)
             {
                 return NotFound();
             }
@@ -97,12 +98,12 @@ namespace PortfolioMyriam.Controllers
             {
                 try
                 {
-                    _context.Update(portfolioItem);
+                    _context.Update(portfolioItemViewModel.ToEntity());
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PortfolioItemExists(portfolioItem.Id))
+                    if (!PortfolioItemExists(portfolioItemViewModel.Id))
                     {
                         return NotFound();
                     }
@@ -113,7 +114,7 @@ namespace PortfolioMyriam.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(portfolioItem);
+            return View(portfolioItemViewModel);
         }
 
         // GET: Portfolio/Delete/5
@@ -131,7 +132,7 @@ namespace PortfolioMyriam.Controllers
                 return NotFound();
             }
 
-            return View(portfolioItem);
+            return View(portfolioItem.ToViewModel());
         }
 
         // POST: Portfolio/Delete/5

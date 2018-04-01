@@ -1,4 +1,5 @@
-﻿@model PortfolioMyriam.Models.PortfolioItem
+﻿@model PortfolioMyriam.Models.PortfolioItemViewModel
+@using PortfolioMyriam.Models.Enums
 
 @{
     ViewData["Title"] = "Details";
@@ -26,7 +27,15 @@
             @Html.DisplayNameFor(model => model.ExternalReference)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ExternalReference)
+            @if (Model.ExternalReference.ExternalReferenceType == ExternalReferenceType.IFrame)
+            {
+                <iframe allowfullscreen webkitallowfullscreen width="640" height="480" frameborder="0" seamless src="@Model.ExternalReference.Uri"></iframe>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.ExternalReference.Uri)
+            }
+
         </dd>
     </dl>
 </div>
