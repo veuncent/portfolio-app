@@ -6,3 +6,8 @@ services:
     build:
       context: .
       dockerfile: PortfolioMyriam/Dockerfile
+    environment:
+      - PORTFOLIO_DB_HOST=
+      - PORTFOLIO_DB_PORT=
+      - PORTFOLIO_DB_USER=
+      - PORTFOLIO_DB_PASSWORD=

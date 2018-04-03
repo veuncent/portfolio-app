@@ -4,6 +4,10 @@ services:
   portfoliomyriam:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - PORTFOLIO_DB_HOST=portfolio-db
+      - PORTFOLIO_DB_PORT=5432
+      - PORTFOLIO_DB_USER=postgres
+      - PORTFOLIO_DB_PASSWORD=postgres
     ports:
       - "80"
 
