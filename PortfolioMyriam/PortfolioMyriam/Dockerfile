@@ -17,4 +17,5 @@ RUN dotnet publish -c Release -o /app -r linux-x64
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
+ENV ASPNETCORE_URLS http://+:5000
 ENTRYPOINT ["dotnet", "PortfolioMyriam.dll"]
