@@ -8,6 +8,8 @@ services:
       - PORTFOLIO_DB_PORT=5432
       - PORTFOLIO_DB_USER=postgres
       - PORTFOLIO_DB_PASSWORD=postgres
+      - ADMIN_PASSWORD=Admin1!
+      - GUEST_PASSWORD=Guest1!
     ports:
       - "80"
 

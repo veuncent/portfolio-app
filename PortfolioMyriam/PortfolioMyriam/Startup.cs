@@ -42,7 +42,7 @@ namespace PortfolioMyriam
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -65,6 +65,87 @@ namespace PortfolioMyriam
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            CreateRoles(serviceProvider);
+            CreateAdmin(serviceProvider);
+            CreateGuest(serviceProvider);
+        }
+
+
+        private static void CreateRoles(IServiceProvider serviceProvider)
+        {
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            string[] roleNames = { "Admin", "Guest" };
+
+            foreach (var roleName in roleNames)
+            {
+                CreateRole(roleManager, roleName);
+            }
+        }
+
+
+        private static void CreateRole(RoleManager<IdentityRole> roleManager, string roleName)
+        {
+            var roleExists = roleManager.RoleExistsAsync(roleName);
+            roleExists.Wait();
+
+            if (!roleExists.Result)
+            {
+                Task<IdentityResult> roleResult = roleManager.CreateAsync(new IdentityRole(roleName));
+                roleResult.Wait();
+            }
+        }
+
+
+        private void CreateAdmin(IServiceProvider serviceProvider)
+        {
+            var adminPassword = Environment.ExpandEnvironmentVariables(Configuration["AppSettings:AdminPassword"]);
+            var adminuserName = "Admin";
+            var adminRoleName = "Admin";
+
+            CreateUser(serviceProvider, adminRoleName, adminuserName, adminPassword);
+        }
+
+        private void CreateGuest(IServiceProvider serviceProvider)
+        {
+            var guestPassword = Environment.ExpandEnvironmentVariables(Configuration["AppSettings:GuestPassword"]);
+            var guestuserName = "Guest";
+            var guestRoleName = "Guest";
+
+            CreateUser(serviceProvider, guestRoleName, guestuserName, guestPassword);
+        }
+        
+
+        private void CreateUser(IServiceProvider serviceProvider, string roleName, string userName, string userPassword)
+        {
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+            var existingUser = userManager.FindByNameAsync(userName);
+            existingUser.Wait();
+
+            if (existingUser.Result == null)
+            {
+                var newUser = new ApplicationUser
+                {
+                    UserName = userName
+                };
+
+                var createUserTask = userManager.CreateAsync(newUser, userPassword);
+                createUserTask.Wait();
+
+                if (createUserTask.Result.Succeeded)
+                {
+                    var addRoleToUserTask = userManager.AddToRoleAsync(newUser, roleName);
+                    addRoleToUserTask.Wait();
+                }
+                else
+                {
+                    var exceptionMessages = createUserTask.Result.Errors.Aggregate($"Failed to create user {newUser.UserName}. Errors were: \n\r\n\r", (current, error) => current + ($" - {error} - {error.Code} - {error.Description} \n\r"));
+                    throw new Exception(exceptionMessages);
+                }
+            }
+
         }
     }
 }

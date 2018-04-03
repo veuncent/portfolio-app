@@ -11,3 +11,5 @@ services:
       - PORTFOLIO_DB_PORT=
       - PORTFOLIO_DB_USER=
       - PORTFOLIO_DB_PASSWORD=
+      - ADMIN_PASSWORD=
+      - GUEST_PASSWORD=
