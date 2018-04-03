@@ -8,8 +8,9 @@ services:
       dockerfile: PortfolioMyriam/Dockerfile
     environment:
       - PORTFOLIO_DB_HOST=
-      - PORTFOLIO_DB_PORT=
+      - PORTFOLIO_DB_PORT=5432
       - PORTFOLIO_DB_USER=
       - PORTFOLIO_DB_PASSWORD=
+      - POSTGRES_DB=portfolio
       - ADMIN_PASSWORD=
       - GUEST_PASSWORD=
