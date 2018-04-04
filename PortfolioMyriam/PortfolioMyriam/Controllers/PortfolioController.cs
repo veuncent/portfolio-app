@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PortfolioMyriam.Data;
@@ -7,6 +8,7 @@ using PortfolioMyriam.Models;
 
 namespace PortfolioMyriam.Controllers
 {
+    [Authorize]
     public class PortfolioController : Controller
     {
         private readonly ApplicationDbContext _context;
