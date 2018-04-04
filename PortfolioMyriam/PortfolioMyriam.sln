@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioMyriam", "PortfolioMyriam\PortfolioMyriam.csproj", "{D8CD9269-F4EA-40D1-9E19-77CEA27C1239}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortfolioMyriam", "PortfolioMyriam\PortfolioMyriam.csproj", "{D8CD9269-F4EA-40D1-9E19-77CEA27C1239}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{77F981F9-F2DA-478D-A5BE-E8C19396156D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioMyriam.Tests", "PortfolioMyriam.Tests\PortfolioMyriam.Tests.csproj", "{428FCE79-3602-4EB7-A6B0-D1B089D05132}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{77F981F9-F2DA-478D-A5BE-E8C19396156D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77F981F9-F2DA-478D-A5BE-E8C19396156D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77F981F9-F2DA-478D-A5BE-E8C19396156D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{428FCE79-3602-4EB7-A6B0-D1B089D05132}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{428FCE79-3602-4EB7-A6B0-D1B089D05132}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{428FCE79-3602-4EB7-A6B0-D1B089D05132}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{428FCE79-3602-4EB7-A6B0-D1B089D05132}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

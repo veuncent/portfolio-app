@@ -4,4 +4,5 @@ PortfolioMyriam/obj/
 PortfolioMyriam/PortfolioMyriam/bin/
 PortfolioMyriam/PortfolioMyriam/obj/
 PortfolioMyriam/PortfolioMyriam/Migrations/ApplicationDbContextModelSnapshot.cs
-PortfolioMyriamTests/obj/
+PortfolioMyriam/PortfolioMyriam.Tests/obj/
+PortfolioMyriam/PortfolioMyriam.Tests/bin/

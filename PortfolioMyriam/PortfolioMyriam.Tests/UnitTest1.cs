@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace PortfolioMyriamTests
+namespace PortfolioMyriam.Tests
 {
     public class UnitTest1
     {
