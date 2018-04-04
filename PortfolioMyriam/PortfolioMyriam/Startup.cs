@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using PortfolioMyriam.Data;
 using PortfolioMyriam.Models;
 using PortfolioMyriam.Services;
+using PortfolioMyriam.Models.HelperClasses;
 
 namespace PortfolioMyriam
 {
@@ -102,7 +103,7 @@ namespace PortfolioMyriam
         {
             var adminPassword = Environment.ExpandEnvironmentVariables(Configuration["AppSettings:AdminPassword"]);
             var adminuserName = "Admin";
-            var adminRoleName = "Admin";
+            var adminRoleName = Roles.Admin;
 
             CreateUser(serviceProvider, adminRoleName, adminuserName, adminPassword);
         }
@@ -111,7 +112,7 @@ namespace PortfolioMyriam
         {
             var guestPassword = Environment.ExpandEnvironmentVariables(Configuration["AppSettings:GuestPassword"]);
             var guestuserName = "Guest";
-            var guestRoleName = "Guest";
+            var guestRoleName = Roles.Guest;
 
             CreateUser(serviceProvider, guestRoleName, guestuserName, guestPassword);
         }
