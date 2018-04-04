@@ -5,41 +5,33 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<div class="container-centered spacer-top spacer-bottom">
 
-<div>
-    <h4>PortfolioItem</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd>
+    <div class="portfolio-item-centered">
+        <h4>@Html.DisplayFor(model => model.Title)</h4>
+        <hr />
+        <p>
             @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ExternalReference)
-        </dt>
-        <dd>
-            @if (Model.ExternalReference.ExternalReferenceType == ExternalReferenceType.IFrame)
-            {
-                <iframe allowfullscreen webkitallowfullscreen width="640" height="480" frameborder="0" seamless src="@Model.ExternalReference.Uri"></iframe>
-            }
-            else
-            {
-                @Html.DisplayFor(model => model.ExternalReference.Uri)
-            }
+        </p>
+        @if (Model.ExternalReference.ExternalReferenceType == ExternalReferenceType.IFrame)
+        {
+            <iframe allowfullscreen webkitallowfullscreen width="640" height="480" frameborder="0" seamless src="@Model.ExternalReference.Uri"></iframe>
+        }
+        else
+        {
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ExternalReference)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ExternalReference.Uri)
+                </dd>
+            </dl>
+        }
 
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
 </div>

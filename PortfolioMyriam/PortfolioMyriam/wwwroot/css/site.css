@@ -41,6 +41,15 @@
     text-align: center;
 }
 
+.form-centered {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.portfolio-item-centered {
+    margin: 0 auto;
+}
+
 .navbar-inverse {
     background-color: #1abc9c;
     border-color: #16a085;

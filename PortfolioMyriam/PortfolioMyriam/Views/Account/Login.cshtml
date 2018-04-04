@@ -11,44 +11,43 @@
     ViewData["Title"] = "Log in";
 }
 
-<h2>@ViewData["Title"]</h2>
-<div class="row">
-    <div class="col-md-4">
-        <section>
-            <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
-                <h4>Use an account to log in.</h4>
-                <p>
-                    To request access, <a href="#"
-                                          data-contact="@ViewData["AdminEmail"]"
-                                          onfocus="this.href = 'mailto:' + atob(this.dataset.contact)">
-                        contact me
-                    </a>
-                </p>
-                <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Username"></label>
-                    <input asp-for="Username" class="form-control" />
-                    <span asp-validation-for="Username" class="text-danger"></span>
+<div class="container-centered spacer-top spacer-bottom">
+    <h2>@ViewData["Title"]</h2>
+
+    <div class="form-centered">
+        <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+            <h4>Use an account to log in.</h4>
+            <p>
+                To request access, <a href="#"
+                                      data-contact="@ViewData["AdminEmail"]"
+                                      onfocus="this.href = 'mailto:' + atob(this.dataset.contact)">
+                    contact me
+                </a>
+            </p>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label asp-for="RememberMe">
+                        <input asp-for="RememberMe" />
+                        @Html.DisplayNameFor(m => m.RememberMe)
+                    </label>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Password"></label>
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label asp-for="RememberMe">
-                            <input asp-for="RememberMe" />
-                            @Html.DisplayNameFor(m => m.RememberMe)
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-default">Log in</button>
-                </div>
-            </form>
-        </section>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">Log in</button>
+            </div>
+        </form>
     </div>
 </div>
 
