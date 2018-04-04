@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using PortfolioMyriam.Models;
 using PortfolioMyriam.Models.AccountViewModels;
 using PortfolioMyriam.Models.HelperClasses;
 using PortfolioMyriam.Services;
+using System;
+using System.Threading.Tasks;
 
 namespace PortfolioMyriam.Controllers
 {
@@ -25,17 +20,23 @@ namespace PortfolioMyriam.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly IConfigurationService _configurationService;
+        private readonly IStringHelperService _stringHelperService;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            IConfigurationService configurationService,
+            IStringHelperService stringHelperService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            _configurationService = configurationService;
+            _stringHelperService = stringHelperService;
         }
 
         [TempData]
@@ -49,6 +50,9 @@ namespace PortfolioMyriam.Controllers
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             ViewData["ReturnUrl"] = returnUrl;
+
+            var emailPlainText = _configurationService.GetConfigurationItem("AppSettings:AdminEmail");
+            ViewData["AdminEmail"] = _stringHelperService.GetBase64EncodedString(emailPlainText);
             return View();
         }
 

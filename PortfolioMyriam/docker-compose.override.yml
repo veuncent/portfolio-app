@@ -9,6 +9,7 @@ services:
       - PORTFOLIO_DB_USER=postgres
       - PORTFOLIO_DB_PASSWORD=postgres
       - POSTGRES_DB=portfolio
+      - ADMIN_EMAIL=admin@example.com
       - ADMIN_PASSWORD=Admin1!
       - GUEST_PASSWORD=Guest1!
     ports:

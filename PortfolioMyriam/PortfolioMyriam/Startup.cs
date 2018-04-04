@@ -40,6 +40,10 @@ namespace PortfolioMyriam
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
+
+            services.AddScoped<IConfigurationService, ConfigurationService>();
+
+            services.AddScoped<IStringHelperService, StringHelperService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -102,10 +106,11 @@ namespace PortfolioMyriam
         private void CreateAdmin(IServiceProvider serviceProvider)
         {
             var adminPassword = Environment.ExpandEnvironmentVariables(Configuration["AppSettings:AdminPassword"]);
+            var adminEmail = Environment.ExpandEnvironmentVariables(Configuration["AppSettings:AdminEmail"]);
             var adminuserName = "Admin";
             var adminRoleName = Roles.Admin;
 
-            CreateUser(serviceProvider, adminRoleName, adminuserName, adminPassword);
+            CreateUser(serviceProvider, adminRoleName, adminuserName, adminPassword, adminEmail);
         }
 
         private void CreateGuest(IServiceProvider serviceProvider)
@@ -118,7 +123,7 @@ namespace PortfolioMyriam
         }
         
 
-        private void CreateUser(IServiceProvider serviceProvider, string roleName, string userName, string userPassword)
+        private void CreateUser(IServiceProvider serviceProvider, string roleName, string userName, string userPassword, string userEmail = null)
         {
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
@@ -129,7 +134,8 @@ namespace PortfolioMyriam
             {
                 var newUser = new ApplicationUser
                 {
-                    UserName = userName
+                    UserName = userName,
+                    Email = userEmail
                 };
 
                 var createUserTask = userManager.CreateAsync(newUser, userPassword);
