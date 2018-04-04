@@ -1,15 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PortfolioMyriam.Models;
+using PortfolioMyriam.Services;
+using System.Diagnostics;
 
 namespace PortfolioMyriam.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IConfigurationService _configurationService;
+        private readonly IStringHelperService _stringHelperService;
+
+
+        public HomeController(
+            IConfigurationService configurationService,
+            IStringHelperService stringHelperService)
+        {
+            _configurationService = configurationService;
+            _stringHelperService = stringHelperService;
+        }
+
+
         public IActionResult Index()
         {
             return View();
@@ -24,7 +34,8 @@ namespace PortfolioMyriam.Controllers
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            var emailPlainText = _configurationService.GetConfigurationItem("AppSettings:AdminEmail");
+            ViewData["AdminEmail"] = _stringHelperService.GetBase64EncodedString(emailPlainText);
 
             return View();
         }
