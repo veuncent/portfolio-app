@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PortfolioMyriam.Data;
 using PortfolioMyriam.Models;
+using PortfolioMyriam.Models.HelperClasses;
 
 namespace PortfolioMyriam.Controllers
 {
@@ -44,6 +45,7 @@ namespace PortfolioMyriam.Controllers
         }
 
         // GET: Portfolio/Create
+        [Authorize(Roles = Roles.Admin)]
         public IActionResult Create()
         {
             return View(new PortfolioItemViewModel());
@@ -53,6 +55,7 @@ namespace PortfolioMyriam.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = Roles.Admin)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Description,ExternalReference")] PortfolioItemViewModel portfolioItemViewModel)
         {
@@ -66,6 +69,7 @@ namespace PortfolioMyriam.Controllers
         }
 
         // GET: Portfolio/Edit/5
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -89,6 +93,7 @@ namespace PortfolioMyriam.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,ExternalReference")] PortfolioItemViewModel portfolioItemViewModel)
         {
             if (id != portfolioItemViewModel.Id)
@@ -120,6 +125,7 @@ namespace PortfolioMyriam.Controllers
         }
 
         // GET: Portfolio/Delete/5
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -139,6 +145,7 @@ namespace PortfolioMyriam.Controllers
 
         // POST: Portfolio/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = Roles.Admin)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
