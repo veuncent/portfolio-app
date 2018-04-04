@@ -1,5 +1,6 @@
 ﻿@model PortfolioMyriam.Models.PortfolioItemViewModel
 @using PortfolioMyriam.Models.Enums
+@using PortfolioMyriam.Models.HelperClasses
 
 @{
     ViewData["Title"] = "Details";
@@ -31,7 +32,11 @@
 
     </div>
     <div>
-        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        @if (User.IsInRole(Roles.Admin))
+        {
+            <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> <span>|</span>
+        }
+
         <a asp-action="Index">Back to List</a>
     </div>
 </div>

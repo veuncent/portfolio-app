@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<PortfolioMyriam.Models.PortfolioItemViewModel>
-
+@using PortfolioMyriam.Models.HelperClasses
 @{
     ViewData["Title"] = "Index";
 }
@@ -7,9 +7,13 @@
 <div class="container-centered spacer-top spacer-bottom">
     <h2>Index</h2>
 
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
+    @if (User.IsInRole(Roles.Admin))
+    {
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+    }
+
     <table class="table">
         <thead>
             <tr>
@@ -33,9 +37,12 @@
                         @Html.DisplayFor(modelItem => item.Description)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        @if (User.IsInRole(Roles.Admin))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        }
                     </td>
                 </tr>
             }
