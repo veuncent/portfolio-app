@@ -50,8 +50,10 @@
     margin: 0 auto;
 }
 
+
+/* Navbar */
 .navbar-inverse {
-    background-color: #1abc9c;
+    background-color: #34495D;
     border-color: #16a085;
 }
 
