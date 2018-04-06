@@ -10,7 +10,7 @@ namespace PortfolioMyriam.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public ExternalReference ExternalReference { get; set; }
+        public virtual ExternalReference ExternalReference { get; set; }
 
         public PortfolioItemViewModel ToViewModel()
         {
