@@ -1,6 +1,5 @@
 ﻿@model PortfolioMyriam.Models.PortfolioItemViewModel
-@using PortfolioMyriam.Models.Enums
-@using PortfolioMyriam.Models.HelperClasses
+
 
 @{
     ViewData["Title"] = "Details";
@@ -9,7 +8,7 @@
 <div class="container-centered portfolio-item portfolio-item-centered spacer-top spacer-bottom">
 
     @await Html.PartialAsync("DetailsPartial")
-    <div class="spacer-top-half">
-        <a asp-action="Index"><i class="fas fa-arrow-left"></i> Back to List</a>
-    </div>
+    @await Html.PartialAsync("AdminEditPartial")
+    @await Html.PartialAsync("BackToListPartial")
+
 </div>

@@ -28,8 +28,3 @@
     }
 
 </div>
-
-@if (User.IsInRole(Roles.Admin))
-{
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-}
