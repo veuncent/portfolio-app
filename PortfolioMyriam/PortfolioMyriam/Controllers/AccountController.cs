@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using PortfolioMyriam.Models;
 using PortfolioMyriam.Models.AccountViewModels;
@@ -20,23 +21,23 @@ namespace PortfolioMyriam.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
-        private readonly IConfigurationService _configurationService;
         private readonly IStringHelperService _stringHelperService;
+        private readonly IConfiguration _configuration; 
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ILogger<AccountController> logger,
-            IConfigurationService configurationService,
-            IStringHelperService stringHelperService)
+            IStringHelperService stringHelperService,
+            IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
-            _configurationService = configurationService;
             _stringHelperService = stringHelperService;
+            _configuration = configuration;
         }
 
         [TempData]
@@ -51,7 +52,7 @@ namespace PortfolioMyriam.Controllers
 
             ViewData["ReturnUrl"] = returnUrl;
 
-            var emailPlainText = _configurationService.GetConfigurationItem("AppSettings:AdminEmail");
+            var emailPlainText = _configuration["AppSettings:AdminEmail"];
             ViewData["AdminEmail"] = _stringHelperService.GetBase64EncodedString(emailPlainText);
             return View();
         }

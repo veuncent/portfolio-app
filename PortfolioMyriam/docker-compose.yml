@@ -7,10 +7,7 @@ services:
       context: .
       dockerfile: PortfolioMyriam/Dockerfile
     environment:
-      - PORTFOLIO_DB_HOST=
-      - PORTFOLIO_DB_PORT=5432
-      - PORTFOLIO_DB_USER=
-      - PORTFOLIO_DB_PASSWORD=
-      - ADMIN_EMAIL=
-      - ADMIN_PASSWORD=
-      - GUEST_PASSWORD=
+      - ConnectionStrings:DefaultConnection=
+      - AppSettings:AdminEmail=
+      - AppSettings:AdminPassword=
+      - AppSettings:GuestPassword=

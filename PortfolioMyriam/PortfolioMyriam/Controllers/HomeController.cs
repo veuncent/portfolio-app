@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using PortfolioMyriam.Models;
 using PortfolioMyriam.Services;
 using System.Diagnostics;
@@ -7,15 +8,15 @@ namespace PortfolioMyriam.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IConfigurationService _configurationService;
+        private readonly IConfiguration _configuration;
         private readonly IStringHelperService _stringHelperService;
 
 
         public HomeController(
-            IConfigurationService configurationService,
+            IConfiguration configuration,
             IStringHelperService stringHelperService)
         {
-            _configurationService = configurationService;
+            _configuration = configuration;
             _stringHelperService = stringHelperService;
         }
 
@@ -34,7 +35,7 @@ namespace PortfolioMyriam.Controllers
 
         public IActionResult Contact()
         {
-            var emailPlainText = _configurationService.GetConfigurationItem("AppSettings:AdminEmail");
+            var emailPlainText = _configuration["AppSettings:AdminEmail"];
             ViewData["AdminEmail"] = _stringHelperService.GetBase64EncodedString(emailPlainText);
 
             return View();

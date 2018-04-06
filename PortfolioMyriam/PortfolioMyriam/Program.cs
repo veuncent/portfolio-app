@@ -19,6 +19,11 @@ namespace PortfolioMyriam
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration(
+                    (WebHostBuilderContext context, IConfigurationBuilder builder) =>
+                    {
+                        builder.AddEnvironmentVariables();
+                    })
                 .UseStartup<Startup>()
                 .Build();
     }

@@ -4,13 +4,10 @@ services:
   portfoliomyriam:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - PORTFOLIO_DB_HOST=portfolio-db
-      - PORTFOLIO_DB_PORT=5432
-      - PORTFOLIO_DB_USER=postgres
-      - PORTFOLIO_DB_PASSWORD=postgres
-      - ADMIN_EMAIL=admin@example.com
-      - ADMIN_PASSWORD=Admin1!
-      - GUEST_PASSWORD=Guest1!
+      - ConnectionStrings:DefaultConnection=Server=portfolio-db;Port=5432;Database=portfolio;Username=postgres;Password=postgres
+      - AppSettings:AdminEmail=admin@example.com
+      - AppSettings:AdminPassword=Admin1!
+      - AppSettings:GuestPassword=Guest1!
     ports:
       - "80"
 

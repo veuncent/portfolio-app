@@ -27,7 +27,7 @@ namespace PortfolioMyriam
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var defaultConnectionString = Environment.ExpandEnvironmentVariables(Configuration.GetConnectionString("DefaultConnection"));
+            var defaultConnectionString = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(defaultConnectionString));
@@ -37,11 +37,11 @@ namespace PortfolioMyriam
                 .AddDefaultTokenProviders();
 
             // Add application services.
+            services.AddSingleton<IConfiguration>(Configuration);
+
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
-
-            services.AddScoped<IConfigurationService, ConfigurationService>();
 
             services.AddScoped<IStringHelperService, StringHelperService>();
         }
@@ -121,7 +121,7 @@ namespace PortfolioMyriam
 
             CreateUser(serviceProvider, guestRoleName, guestuserName, guestPassword);
         }
-        
+
 
         private void CreateUser(IServiceProvider serviceProvider, string roleName, string userName, string userPassword, string userEmail = null)
         {
