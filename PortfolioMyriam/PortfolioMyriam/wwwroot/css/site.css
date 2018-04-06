@@ -37,6 +37,7 @@
 }
 
 .container-centered {
+    max-width: 800px;
     margin: auto;
     text-align: center;
 }
@@ -46,12 +47,14 @@
     margin: 0 auto;
 }
 
-.portfolio-item .description {
-    text-align: justify;
-}
-.portfolio-item-centered {
+.portfolio-item {
     margin: 0 auto;
 }
+
+    .portfolio-item .description {
+        text-align: justify;
+        text-align-last: center;
+    }
 
 
 /* Navbar */
