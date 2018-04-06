@@ -1,45 +1,25 @@
 ﻿@model PortfolioMyriam.Models.PortfolioItemViewModel
-@using PortfolioMyriam.Models.Enums
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Portfolio Item";
 }
 
-<h2>Create</h2>
+<div class="container-centered portfolio-item spacer-top spacer-bottom">
 
-<h4>PortfolioItem</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ExternalReference" class="control-label"></label>
-                <select asp-for="ExternalReference.ExternalReferenceType" asp-items="Html.GetEnumSelectList<ExternalReferenceType>()" class="form-control" style="margin-bottom: 5px;">
-                    <option selected="selected" value="">Select reference type</option>
-                </select>
-                <input asp-for="ExternalReference.Uri" class="form-control" />
-                <span asp-validation-for="ExternalReference.Uri" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
-    </div>
-</div>
+    <h2>Create Portfolio Item</h2>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+    <hr />
+
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @await Html.PartialAsync("EditCreatePartial")
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </form>
+
+
+    @await Html.PartialAsync("BackToListPartial")
 </div>
 
 @section Scripts {

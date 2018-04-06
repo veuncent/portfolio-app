@@ -1,0 +1,21 @@
+﻿@model PortfolioMyriam.Models.PortfolioItemViewModel
+@using PortfolioMyriam.Models.Enums
+
+<div class="form-group">
+    <label asp-for="Title" class="control-label"></label>
+    <input asp-for="Title" class="form-control" />
+    <span asp-validation-for="Title" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Description" class="control-label"></label>
+    <textarea asp-for="Description" rows="5" class="form-control"></textarea>
+    <span asp-validation-for="Description" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="ExternalReference" class="control-label"></label>
+    <select asp-for="ExternalReference.ExternalReferenceType" asp-items="Html.GetEnumSelectList<ExternalReferenceType>()" class="form-control" style="margin-bottom: 5px;">
+        <option selected="selected" value="">Select reference type</option>
+    </select>
+    <input asp-for="ExternalReference.Uri" class="form-control" />
+    <span asp-validation-for="ExternalReference.Uri" class="text-danger"></span>
+</div>
