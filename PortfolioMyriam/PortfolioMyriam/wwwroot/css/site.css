@@ -87,7 +87,6 @@
 
 
 
-
 /* Spacers */
 .spacer-top {
     margin-top: 15vh;
@@ -95,4 +94,10 @@
 
 .spacer-bottom {
     margin-bottom: 15vh;
+}
+
+.portfolio-circle {
+    color: #34495D;
+    margin-left: 10px;
+    margin-right: 10px;
 }
