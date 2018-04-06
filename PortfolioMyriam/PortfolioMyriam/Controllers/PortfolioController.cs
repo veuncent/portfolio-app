@@ -134,6 +134,7 @@ namespace PortfolioMyriam.Controllers
             }
 
             var portfolioItem = await _context.PortfolioItem
+                .Include(pi => pi.ExternalReference)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (portfolioItem == null)
             {
