@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <UserSecretsId>aspnet-PortfolioMyriam-283461AC-E300-487C-9049-8E0873B21669</UserSecretsId>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <ApplicationIcon>myriam_van_walsum_icon.ico</ApplicationIcon>
   </PropertyGroup>
 
 
