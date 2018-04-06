@@ -62,6 +62,22 @@
         color: #dcf2ee;
     }
 
+@media (min-width: 768px) {
+    .navbar .navbar-nav {
+        display: inline-block;
+        float: none;
+        vertical-align: top;
+    }
+
+    .navbar .navbar-collapse {
+        text-align: center;
+    }
+}
+
+
+
+/* Images */
+
 .profile-image {
     display: block;
     margin: 0 auto;
