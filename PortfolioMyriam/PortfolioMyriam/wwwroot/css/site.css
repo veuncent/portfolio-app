@@ -46,6 +46,9 @@
     margin: 0 auto;
 }
 
+.portfolio-item .description {
+    text-align: justify;
+}
 .portfolio-item-centered {
     margin: 0 auto;
 }
@@ -90,6 +93,10 @@
 /* Spacers */
 .spacer-top {
     margin-top: 15vh;
+}
+
+.spacer-top-half {
+    margin-top: 7vh;
 }
 
 .spacer-bottom {

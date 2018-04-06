@@ -6,37 +6,10 @@
     ViewData["Title"] = "Details";
 }
 
-<div class="container-centered spacer-top spacer-bottom">
+<div class="container-centered portfolio-item portfolio-item-centered spacer-top spacer-bottom">
 
-    <div class="portfolio-item-centered">
-        <h4>@Html.DisplayFor(model => model.Title)</h4>
-        <hr />
-        <p>
-            @Html.DisplayFor(model => model.Description)
-        </p>
-        @if (Model.ExternalReference.ExternalReferenceType == ExternalReferenceType.IFrame)
-        {
-            <iframe allowfullscreen webkitallowfullscreen width="640" height="480" frameborder="0" seamless src="@Model.ExternalReference.Uri"></iframe>
-        }
-        else
-        {
-            <dl>
-                <dt>
-                    @Html.DisplayNameFor(model => model.ExternalReference)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.ExternalReference.Uri)
-                </dd>
-            </dl>
-        }
-
-    </div>
-    <div>
-        @if (User.IsInRole(Roles.Admin))
-        {
-            <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> <span>|</span>
-        }
-
-        <a asp-action="Index">Back to List</a>
+    @await Html.PartialAsync("DetailsPartial")
+    <div class="spacer-top-half">
+        <a asp-action="Index"><i class="fas fa-arrow-left"></i> Back to List</a>
     </div>
 </div>

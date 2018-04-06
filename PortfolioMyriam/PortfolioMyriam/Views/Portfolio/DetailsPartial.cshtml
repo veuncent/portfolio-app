@@ -1,0 +1,35 @@
+﻿@model PortfolioMyriam.Models.PortfolioItemViewModel
+@using PortfolioMyriam.Models.Enums
+@using PortfolioMyriam.Models.HelperClasses
+
+
+<div>
+    <h4>@Html.DisplayFor(model => model.Title)</h4>
+    <hr />
+    <p class="description">
+        @Html.DisplayFor(model => model.Description)
+    </p>
+    @if (Model.ExternalReference.ExternalReferenceType == ExternalReferenceType.IFrame)
+    {
+        <div class="spacer-top-half">
+            <iframe allowfullscreen webkitallowfullscreen width="640" height="480" frameborder="0" seamless src="@Model.ExternalReference.Uri"></iframe>
+        </div>
+    }
+    else
+    {
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.ExternalReference)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ExternalReference.Uri)
+            </dd>
+        </dl>
+    }
+
+</div>
+
+@if (User.IsInRole(Roles.Admin))
+{
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+}
