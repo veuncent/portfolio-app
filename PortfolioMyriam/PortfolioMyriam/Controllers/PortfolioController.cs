@@ -25,7 +25,7 @@ namespace PortfolioMyriam.Controllers
         // GET: Portfolio
         public async Task<IActionResult> Index()
         {
-            return View(await _context.PortfolioItem.Select(pi => pi.ToViewModel()).ToListAsync());
+            return View(await _context.PortfolioItem.Select(pi => pi.ToViewModel(_context)).ToListAsync());
         }
 
         // GET: Portfolio/Details/5
@@ -45,7 +45,7 @@ namespace PortfolioMyriam.Controllers
                 return NotFound();
             }
 
-            return View(portfolioItem.ToViewModel());
+            return View(portfolioItem.ToViewModel(_context));
         }
 
         // GET: Portfolio/Create
@@ -68,7 +68,7 @@ namespace PortfolioMyriam.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(portfolioItemViewModel.ToEntity());
+                _context.Add(portfolioItemViewModel.ToEntity(_context));
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -117,7 +117,7 @@ namespace PortfolioMyriam.Controllers
             {
                 try
                 {
-                    _context.Update(portfolioItemViewModel.ToEntity());
+                    _context.Update(portfolioItemViewModel.ToEntity(_context));
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -154,7 +154,7 @@ namespace PortfolioMyriam.Controllers
                 return NotFound();
             }
 
-            return View(portfolioItem.ToViewModel());
+            return View(portfolioItem.ToViewModel(_context));
         }
 
         // POST: Portfolio/Delete/5

@@ -1,4 +1,7 @@
-﻿namespace PortfolioMyriam.Models
+﻿using PortfolioMyriam.Data;
+using System.Collections.Generic;
+
+namespace PortfolioMyriam.Models
 {
     public class PortfolioItemViewModel
     {
@@ -9,9 +12,9 @@
         public int ProjectId { get; set; }
         public IEnumerable<ProjectBaseViewModel> ProjectOptions { get; set; }
 
-        public PortfolioItem ToEntity()
+        public PortfolioItem ToEntity(ApplicationDbContext context)
         {
-            return new PortfolioItem
+            var entity = new PortfolioItem
             {
                 Id = this.Id,
                 Title = Title,
