@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using PortfolioMyriam.Models.HelperClasses
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -30,7 +32,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Portfolio" asp-action="Index">Portfolio</a></li>
+                    <li><a asp-area="" asp-controller="Projects" asp-action="Index">Projects</a></li>
+                    @if (User.IsInRole(Roles.Admin))
+                    {
+                        <li><a asp-area="" asp-controller="Portfolio" asp-action="Index">Portfolio</a></li>
+                    }
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")

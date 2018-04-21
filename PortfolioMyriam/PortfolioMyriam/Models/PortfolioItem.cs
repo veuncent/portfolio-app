@@ -8,6 +8,7 @@
         public virtual ExternalReference ExternalReference { get; set; }
 
         public PortfolioItemViewModel ToViewModel()
+        public virtual Project Project { get; set; }
         {
             var viewModel = new PortfolioItemViewModel
             {

@@ -6,6 +6,8 @@
         public string Title { get; set; }
         public string Description { get; set; }
         public ExternalReferenceViewModel ExternalReference { get; set; }
+        public int ProjectId { get; set; }
+        public IEnumerable<ProjectBaseViewModel> ProjectOptions { get; set; }
 
         public PortfolioItem ToEntity()
         {
@@ -21,6 +23,15 @@
                     Uri = ExternalReference.Uri
                 }
             };
+
+            if (ProjectId != 0)
+            {
+                var project = context.Projects.FindAsync(ProjectId);
+                project.Wait();
+                entity.Project = project.Result;
+            }
+
+            return entity;
         }
     }
 }

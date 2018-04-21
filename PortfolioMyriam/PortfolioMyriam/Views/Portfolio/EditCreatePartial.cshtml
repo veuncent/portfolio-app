@@ -19,3 +19,9 @@
     <input asp-for="ExternalReference.Uri" class="form-control" />
     <span asp-validation-for="ExternalReference.Uri" class="text-danger"></span>
 </div>
+<div class="form-group">
+    <label class="control-label">Select a project</label>
+    <select asp-for="ProjectId" asp-items="@(new SelectList(Model.ProjectOptions, "Id", "Title"))" class="form-control" style="margin-bottom: 5px;">
+        <option selected="selected" value="">Select project</option>
+    </select>
+</div>
