@@ -35,6 +35,7 @@ namespace PortfolioMyriam.Controllers
 
             var portfolioItem = await _context.PortfolioItem
                 .Include(pi => pi.ExternalReference)
+                .Include(pi => pi.Project)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (portfolioItem == null)
             {
@@ -48,7 +49,10 @@ namespace PortfolioMyriam.Controllers
         [Authorize(Roles = Roles.Admin)]
         public IActionResult Create()
         {
-            return View(new PortfolioItemViewModel());
+            var viewModel = new PortfolioItemViewModel();
+            viewModel.ProjectOptions = _databaseService.GetProjectBaseList();
+
+            return View(viewModel);
         }
 
         // POST: Portfolio/Create
@@ -57,7 +61,7 @@ namespace PortfolioMyriam.Controllers
         [HttpPost]
         [Authorize(Roles = Roles.Admin)]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,ExternalReference")] PortfolioItemViewModel portfolioItemViewModel)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description,ExternalReference,ProjectId")] PortfolioItemViewModel portfolioItemViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -79,13 +83,18 @@ namespace PortfolioMyriam.Controllers
 
             var portfolioItem = await _context.PortfolioItem
                 .Include(pi => pi.ExternalReference)
+                .Include(pi => pi.Project)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
             if (portfolioItem == null)
             {
                 return NotFound();
             }
-            return View(portfolioItem.ToViewModel());
+
+            var viewModel = portfolioItem.ToViewModel(_context);
+            viewModel.ProjectOptions = _databaseService.GetProjectBaseList();
+
+            return View(viewModel);
         }
 
         // POST: Portfolio/Edit/5
@@ -94,7 +103,7 @@ namespace PortfolioMyriam.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = Roles.Admin)]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,ExternalReference")] PortfolioItemViewModel portfolioItemViewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,ExternalReference,ProjectId")] PortfolioItemViewModel portfolioItemViewModel)
         {
             if (id != portfolioItemViewModel.Id)
             {
@@ -135,6 +144,7 @@ namespace PortfolioMyriam.Controllers
 
             var portfolioItem = await _context.PortfolioItem
                 .Include(pi => pi.ExternalReference)
+                .Include(pi => pi.Project)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (portfolioItem == null)
             {

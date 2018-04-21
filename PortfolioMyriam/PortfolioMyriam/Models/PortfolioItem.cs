@@ -1,4 +1,6 @@
-﻿namespace PortfolioMyriam.Models
+﻿using PortfolioMyriam.Data;
+
+namespace PortfolioMyriam.Models
 {
     public class PortfolioItem
     {
@@ -7,8 +9,9 @@
         public string Description { get; set; }
         public virtual ExternalReference ExternalReference { get; set; }
 
-        public PortfolioItemViewModel ToViewModel()
         public virtual Project Project { get; set; }
+
+        public PortfolioItemViewModel ToViewModel(ApplicationDbContext context)
         {
             var viewModel = new PortfolioItemViewModel
             {
@@ -25,6 +28,11 @@
                     ExternalReferenceType = ExternalReference.ExternalReferenceType,
                     Uri = ExternalReference.Uri ?? null
                 };
+            }
+
+            if (Project != null)
+            {
+                viewModel.ProjectId = Project.Id;
             }
 
             return viewModel;
