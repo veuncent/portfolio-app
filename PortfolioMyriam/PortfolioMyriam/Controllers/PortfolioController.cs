@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using PortfolioMyriam.Data;
 using PortfolioMyriam.Models;
 using PortfolioMyriam.Models.HelperClasses;
+using PortfolioMyriam.Services;
 
 namespace PortfolioMyriam.Controllers
 {
@@ -13,10 +14,12 @@ namespace PortfolioMyriam.Controllers
     public class PortfolioController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IDatabaseService _databaseService;
 
-        public PortfolioController(ApplicationDbContext context)
+        public PortfolioController(ApplicationDbContext context, IDatabaseService databaseService)
         {
             _context = context;
+            _databaseService = databaseService;
         }
 
         // GET: Portfolio

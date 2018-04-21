@@ -44,6 +44,8 @@ namespace PortfolioMyriam
             services.AddMvc();
 
             services.AddScoped<IStringHelperService, StringHelperService>();
+
+            services.AddScoped<IDatabaseService, DatabaseService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
