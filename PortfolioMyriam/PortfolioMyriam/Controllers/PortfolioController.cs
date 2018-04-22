@@ -1,12 +1,12 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PortfolioMyriam.Data;
 using PortfolioMyriam.Models;
 using PortfolioMyriam.Models.HelperClasses;
 using PortfolioMyriam.Services;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PortfolioMyriam.Controllers
 {
