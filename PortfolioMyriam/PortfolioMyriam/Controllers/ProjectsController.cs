@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PortfolioMyriam.Data;
 using PortfolioMyriam.Models;
 using PortfolioMyriam.Models.HelperClasses;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PortfolioMyriam.Controllers
 {
@@ -57,7 +57,7 @@ namespace PortfolioMyriam.Controllers
         [HttpPost]
         [Authorize(Roles = Roles.Admin)]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,Image,PortfolioItems")] ProjectViewModel projectViewModel)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description,ProjectType,Image,PortfolioItems")] ProjectViewModel projectViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace PortfolioMyriam.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = Roles.Admin)]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,PortfolioItems")] ProjectViewModel projectViewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,ProjectType,PortfolioItems")] ProjectViewModel projectViewModel)
         {
             if (id != projectViewModel.Id)
             {

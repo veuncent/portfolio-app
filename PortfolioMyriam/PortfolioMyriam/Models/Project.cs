@@ -1,4 +1,5 @@
 ﻿using PortfolioMyriam.Data;
+using PortfolioMyriam.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace PortfolioMyriam.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public byte[] Image { get; set; }
+        public ProjectType? ProjectType { get; set; }
+
         public virtual ICollection<PortfolioItem> PortfolioItems { get; set; }
 
         public ProjectViewModel ToViewModel(ApplicationDbContext context)
@@ -21,6 +24,7 @@ namespace PortfolioMyriam.Models
                 Id = Id,
                 Title = Title,
                 Description = Description,
+                ProjectType = ProjectType,
                 Image = Image,
             };
 

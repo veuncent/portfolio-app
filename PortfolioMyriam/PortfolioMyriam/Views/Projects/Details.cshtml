@@ -11,9 +11,8 @@
     <div class="portfolio-item-centered">
         <h4>@Html.DisplayFor(model => model.Title)</h4>
         <hr />
-        <p>
-            @Html.DisplayFor(model => model.Description)
-        </p>
+        <p>@Html.DisplayFor(model => model.ProjectType)</p>
+        <p>@Html.DisplayFor(model => model.Description)</p>
         <img src="@Model.Image" />
         <dl></dl>
 

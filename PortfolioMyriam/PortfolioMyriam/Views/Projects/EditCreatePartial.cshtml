@@ -1,4 +1,5 @@
 ﻿@model PortfolioMyriam.Models.ProjectViewModel
+@using PortfolioMyriam.Models.Enums
 
 
 <div class="form-group">
@@ -10,6 +11,13 @@
     <label asp-for="Description" class="control-label"></label>
     <textarea asp-for="Description" rows="5" class="form-control"></textarea>
     <span asp-validation-for="Description" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="ProjectType" class="control-label"></label>
+    <select asp-for="ProjectType" asp-items="Html.GetEnumSelectList<ProjectType>()" class="form-control" style="margin-bottom: 5px;">
+        <option selected="selected" value="">Select project type</option>
+    </select>
+    <span asp-validation-for="ProjectType" class="text-danger"></span>
 </div>
 <div class="form-group">
     <label asp-for="Image" class="control-label"></label>
