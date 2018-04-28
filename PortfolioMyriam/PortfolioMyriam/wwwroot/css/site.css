@@ -47,14 +47,20 @@
     margin: 0 auto;
 }
 
+.description {
+    text-align: justify;
+    text-align-last: center;
+}
+
+.project-detail .description {
+    margin-right: 15px;
+}
+
+
 .portfolio-item {
     margin: 0 auto;
 }
 
-    .portfolio-item .description {
-        text-align: justify;
-        text-align-last: center;
-    }
 
 
 /* Navbar */
