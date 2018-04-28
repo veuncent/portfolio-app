@@ -33,12 +33,16 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Projects" asp-action="Index">Projects</a></li>
-                    @if (User.IsInRole(Roles.Admin))
-                    {
-                        <li><a asp-area="" asp-controller="Portfolio" asp-action="Index">Portfolio</a></li>
-                    }
+
+
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
+                @if (User.IsInRole(Roles.Admin))
+                {
+                    <ul class="nav navbar-nav">
+                        <li><a style="color: rgb(157, 157, 157);" asp-area="" asp-controller="Portfolio" asp-action="Index">All Portfolio Items</a></li>
+                    </ul>
+                }
                 @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>
