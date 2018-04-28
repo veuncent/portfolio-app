@@ -3,7 +3,6 @@ using PortfolioMyriam.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace PortfolioMyriam.Models
 {
@@ -24,9 +23,13 @@ namespace PortfolioMyriam.Models
                 Id = Id,
                 Title = Title,
                 Description = Description,
-                ProjectType = ProjectType,
-                Image = Image,
+                ProjectType = ProjectType
             };
+
+            if (Image != null)
+            {
+                viewModel.ImageViewOnly = string.Format($"data:image/png;base64,{Convert.ToBase64String(Image)}");
+            }
 
             if (PortfolioItems != null)
             {

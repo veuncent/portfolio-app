@@ -57,11 +57,12 @@ namespace PortfolioMyriam.Controllers
         [HttpPost]
         [Authorize(Roles = Roles.Admin)]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,ProjectType,Image,PortfolioItems")] ProjectViewModel projectViewModel)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description,ProjectType,ImageUpload,PortfolioItems")] ProjectViewModel projectViewModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(projectViewModel.ToEntity(_context));
+                var entity = await projectViewModel.ToEntityAsync(_context);
+                _context.Add(entity);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -94,7 +95,7 @@ namespace PortfolioMyriam.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = Roles.Admin)]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,ProjectType,PortfolioItems")] ProjectViewModel projectViewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,ProjectType,ImageUpload,PortfolioItems")] ProjectViewModel projectViewModel)
         {
             if (id != projectViewModel.Id)
             {
@@ -105,7 +106,8 @@ namespace PortfolioMyriam.Controllers
             {
                 try
                 {
-                    _context.Update(projectViewModel.ToEntity(_context));
+                    var entity = await projectViewModel.ToEntityAsync(_context);
+                    _context.Update(entity);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

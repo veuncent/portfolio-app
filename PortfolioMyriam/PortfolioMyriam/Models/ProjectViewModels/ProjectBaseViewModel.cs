@@ -1,4 +1,5 @@
 ﻿using PortfolioMyriam.Data;
+using System.Threading.Tasks;
 
 namespace PortfolioMyriam.Models
 {
@@ -7,7 +8,7 @@ namespace PortfolioMyriam.Models
         public int Id { get; set; }
         public string Title { get; set; }
 
-        public virtual Project ToEntity(ApplicationDbContext context)
+        public virtual async Task<Project> ToEntityAsync(ApplicationDbContext context)
         {
             return new Project
             {
