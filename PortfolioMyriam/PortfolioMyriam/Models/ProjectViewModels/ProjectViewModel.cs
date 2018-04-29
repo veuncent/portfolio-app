@@ -11,7 +11,7 @@ namespace PortfolioMyriam.Models
     public class ProjectViewModel : ProjectBaseViewModel
     {
         public string Description { get; set; }
-        public ProjectType? ProjectType { get; set; }
+        public ProjectType ProjectType { get; set; }
         public IFormFile ImageUpload { get; set; }
         public string ImageViewOnly { get; set; }
         public IEnumerable<PortfolioItemViewModel> PortfolioItems { get; set; }
