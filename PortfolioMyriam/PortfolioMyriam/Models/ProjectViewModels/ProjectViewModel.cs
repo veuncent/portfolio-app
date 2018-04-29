@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using PortfolioMyriam.Data;
 using PortfolioMyriam.Models.Enums;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace PortfolioMyriam.Models
         public string ImageViewOnly { get; set; }
         public IEnumerable<PortfolioItemViewModel> PortfolioItems { get; set; }
 
-        public override async Task<Project> ToEntityAsync(ApplicationDbContext context)
+        public async Task SaveModelAsync(ApplicationDbContext context)
         {
             var entity = new Project
             {
@@ -33,14 +34,17 @@ namespace PortfolioMyriam.Models
                     await ImageUpload.CopyToAsync(memoryStream);
                     entity.Image = memoryStream.ToArray();
                 };
-            };
+            }
 
             if (PortfolioItems != null)
             {
                 entity.PortfolioItems = PortfolioItems.Select(pi => pi.ToEntity(context)).ToList();
-            };
+            }
 
-            return entity;
+            context.Update(entity);
+            context.Entry(entity).Property(p => p.Image).IsModified = ImageUpload != null ? true : false;
+
+            await context.SaveChangesAsync();
         }
     }
 }

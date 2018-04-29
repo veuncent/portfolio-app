@@ -61,9 +61,7 @@ namespace PortfolioMyriam.Controllers
         {
             if (ModelState.IsValid)
             {
-                var entity = await projectViewModel.ToEntityAsync(_context);
-                _context.Add(entity);
-                await _context.SaveChangesAsync();
+                await projectViewModel.SaveModelAsync(_context);
                 return RedirectToAction(nameof(Index));
             }
             return View(projectViewModel);
@@ -106,9 +104,7 @@ namespace PortfolioMyriam.Controllers
             {
                 try
                 {
-                    var entity = await projectViewModel.ToEntityAsync(_context);
-                    _context.Update(entity);
-                    await _context.SaveChangesAsync();
+                   await projectViewModel.SaveModelAsync(_context);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
