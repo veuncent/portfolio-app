@@ -26,8 +26,24 @@ namespace PortfolioMyriam.Services
             }).ToListAsync();
         }
 
+        public async Task<Project> GetProjectDetails(int id)
+        {
+            var portfolioItems = _context.PortfolioItem
+                .Where(pi => pi.Project.Id == id)
+                .OrderBy(pi => pi.ExternalReference.ExternalReferenceType)
+                .ToList();
 
-            return projectOptions.Result;
+            return await _context.Projects
+                .Select(p => new Project
+                {
+                    Id = p.Id,
+                    Title = p.Title,
+                    ProjectType = p.ProjectType,
+                    Description = p.Description,
+                    Image = p.Image,
+                    PortfolioItems = portfolioItems
+                })
+                .SingleOrDefaultAsync(m => m.Id == id);
         }
     }
 }
