@@ -1,5 +1,6 @@
 ﻿using PortfolioMyriam.Data;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace PortfolioMyriam.Models
 {
@@ -8,7 +9,9 @@ namespace PortfolioMyriam.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        [Display(Name = "External Reference")]
         public ExternalReferenceViewModel ExternalReference { get; set; }
+        [Display(Name = "Project")]
         public int ProjectId { get; set; }
         public IEnumerable<ProjectBaseViewModel> ProjectOptions { get; set; }
 

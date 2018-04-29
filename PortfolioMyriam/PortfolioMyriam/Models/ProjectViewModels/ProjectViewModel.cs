@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PortfolioMyriam.Data;
 using PortfolioMyriam.Models.Enums;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +13,9 @@ namespace PortfolioMyriam.Models
     public class ProjectViewModel : ProjectBaseViewModel
     {
         public string Description { get; set; }
+        [Display(Name = "Project Type")]
         public ProjectType ProjectType { get; set; }
+        [Display(Name = "Image Upload")]
         public IFormFile ImageUpload { get; set; }
         public string ImageViewOnly { get; set; }
         public IEnumerable<PortfolioItemViewModel> PortfolioItems { get; set; }
