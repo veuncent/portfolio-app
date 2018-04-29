@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using PortfolioMyriam.Data;
 using PortfolioMyriam.Models;
 using PortfolioMyriam.Models.HelperClasses;
+using PortfolioMyriam.Services;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,10 +14,12 @@ namespace PortfolioMyriam.Controllers
     public class ProjectsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IDatabaseService _databaseService;
 
-        public ProjectsController(ApplicationDbContext context)
+        public ProjectsController(ApplicationDbContext context, IDatabaseService databaseService)
         {
             _context = context;
+            _databaseService = databaseService;
         }
 
         // GET: Projects
@@ -33,9 +36,7 @@ namespace PortfolioMyriam.Controllers
                 return NotFound();
             }
 
-            var project = await _context.Projects
-                .Include(p => p.PortfolioItems)
-                .SingleOrDefaultAsync(m => m.Id == id);
+            var project = await _databaseService.GetProjectDetails(id.Value);
             if (project == null)
             {
                 return NotFound();
