@@ -11,9 +11,9 @@
     </p>
     @if (Model.ExternalReference.ExternalReferenceType == ExternalReferenceType.IFrame)
     {
-        <div class="spacer-top-half">
-            <iframe allowfullscreen webkitallowfullscreen width="640" height="480" frameborder="0" seamless src="@Model.ExternalReference.Uri"></iframe>
-        </div>
+    <div class="spacer-top-half">
+        @Html.Raw(@Model.ExternalReference.Uri)
+    </div>
     }
     else
     {
