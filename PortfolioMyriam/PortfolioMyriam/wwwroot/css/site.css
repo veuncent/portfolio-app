@@ -49,7 +49,7 @@
 
 .description {
     text-align: justify;
-    text-align-last: center;
+    text-align-last: left;
 }
 
 .project-detail .description {
@@ -60,6 +60,10 @@
 .portfolio-item {
     margin: 0 auto;
 }
+
+    .portfolio-item .description {
+        text-align-last: center;
+    }
 
 
 
