@@ -50,10 +50,10 @@ namespace PortfolioMyriam.Controllers
 
         // GET: Portfolio/Create
         [Authorize(Roles = Roles.Admin)]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             var viewModel = new PortfolioItemViewModel();
-            viewModel.ProjectOptions = _databaseService.GetProjectBaseViewModelList();
+            viewModel.ProjectOptions = await _databaseService.GetProjectBaseViewModelList();
 
             return View(viewModel);
         }
@@ -95,7 +95,7 @@ namespace PortfolioMyriam.Controllers
             }
 
             var viewModel = portfolioItem.ToViewModel(_context);
-            viewModel.ProjectOptions = _databaseService.GetProjectBaseViewModelList();
+            viewModel.ProjectOptions = await _databaseService.GetProjectBaseViewModelList();
 
             return View(viewModel);
         }

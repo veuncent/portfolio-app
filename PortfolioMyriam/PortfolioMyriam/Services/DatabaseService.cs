@@ -17,15 +17,15 @@ namespace PortfolioMyriam.Services
             _context = context;
         }
 
-        public IEnumerable<ProjectBaseViewModel> GetProjectBaseViewModelList()
+        public async Task<IEnumerable<ProjectBaseViewModel>> GetProjectBaseViewModelList()
         {
-            var projectOptions = _context.Projects.Select(p => new ProjectBaseViewModel
+            return await _context.Projects.Select(p => new ProjectBaseViewModel
             {
                 Id = p.Id,
                 Title = p.Title
             }).ToListAsync();
+        }
 
-            projectOptions.Wait();
 
             return projectOptions.Result;
         }
