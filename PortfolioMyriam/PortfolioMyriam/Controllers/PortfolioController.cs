@@ -25,7 +25,7 @@ namespace PortfolioMyriam.Controllers
         // GET: Portfolio
         public async Task<IActionResult> Index()
         {
-            return View(await _context.PortfolioItem.Select(pi => pi.ToViewModel(_context)).ToListAsync());
+            return View(await _context.PortfolioItem.Select(pi => pi.ToViewModel(_context)).OrderBy(pi => pi.Title).ToListAsync());
         }
 
         // GET: Portfolio/Details/5
