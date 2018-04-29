@@ -7,14 +7,5 @@ namespace PortfolioMyriam.Models
     {
         public int Id { get; set; }
         public string Title { get; set; }
-
-        public virtual async Task<Project> ToEntityAsync(ApplicationDbContext context)
-        {
-            return new Project
-            {
-                Id = Id,
-                Title = Title
-            };
-        }
     }
 }
