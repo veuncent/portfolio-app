@@ -16,6 +16,7 @@
     <select asp-for="ExternalReference.ExternalReferenceType" asp-items="Html.GetEnumSelectList<ExternalReferenceType>()" class="form-control" style="margin-bottom: 5px;">
         <option selected="selected" value="">Select reference type</option>
     </select>
+    <span asp-validation-for="ExternalReference.ExternalReferenceType" class="text-danger"></span>
     <input asp-for="ExternalReference.Uri" class="form-control" />
     <span asp-validation-for="ExternalReference.Uri" class="text-danger"></span>
 </div>
@@ -24,4 +25,5 @@
     <select asp-for="ProjectId" asp-items="@(new SelectList(Model.ProjectOptions, "Id", "Title"))" class="form-control" style="margin-bottom: 5px;">
         <option selected="selected" value="">Select project</option>
     </select>
+    <span asp-validation-for="ProjectId" class="text-danger"></span>
 </div>
