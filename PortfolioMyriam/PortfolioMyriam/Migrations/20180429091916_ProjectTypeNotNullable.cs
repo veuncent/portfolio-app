@@ -8,7 +8,7 @@ namespace PortfolioMyriam.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql("UPDATE \"Projects\" SET \"ProjectType\" = 2 WHERE \"ProjectType\" IS NULL");
+            migrationBuilder.Sql("UPDATE \"Projects\" SET \"ProjectType\" = 2 WHERE \"ProjectType\" IS NULL;");
             migrationBuilder.AlterColumn<int>(
                 name: "ProjectType",
                 table: "Projects",
