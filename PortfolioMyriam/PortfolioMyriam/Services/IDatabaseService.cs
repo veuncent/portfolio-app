@@ -8,6 +8,6 @@ namespace PortfolioMyriam.Services
 {
     public interface IDatabaseService
     {
-        IEnumerable<ProjectBaseViewModel> GetProjectBaseList();
+        IEnumerable<ProjectBaseViewModel> GetProjectBaseViewModelList();
     }
 }

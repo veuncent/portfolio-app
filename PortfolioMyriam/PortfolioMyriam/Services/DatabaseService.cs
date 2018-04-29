@@ -17,7 +17,7 @@ namespace PortfolioMyriam.Services
             _context = context;
         }
 
-        public IEnumerable<ProjectBaseViewModel> GetProjectBaseList()
+        public IEnumerable<ProjectBaseViewModel> GetProjectBaseViewModelList()
         {
             var projectOptions = _context.Projects.Select(p => new ProjectBaseViewModel
             {

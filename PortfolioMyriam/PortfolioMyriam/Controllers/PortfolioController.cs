@@ -53,7 +53,7 @@ namespace PortfolioMyriam.Controllers
         public IActionResult Create()
         {
             var viewModel = new PortfolioItemViewModel();
-            viewModel.ProjectOptions = _databaseService.GetProjectBaseList();
+            viewModel.ProjectOptions = _databaseService.GetProjectBaseViewModelList();
 
             return View(viewModel);
         }
@@ -95,7 +95,7 @@ namespace PortfolioMyriam.Controllers
             }
 
             var viewModel = portfolioItem.ToViewModel(_context);
-            viewModel.ProjectOptions = _databaseService.GetProjectBaseList();
+            viewModel.ProjectOptions = _databaseService.GetProjectBaseViewModelList();
 
             return View(viewModel);
         }
