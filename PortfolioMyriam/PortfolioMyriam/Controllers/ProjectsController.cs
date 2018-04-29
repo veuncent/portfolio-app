@@ -104,7 +104,8 @@ namespace PortfolioMyriam.Controllers
             {
                 try
                 {
-                   await projectViewModel.SaveModelAsync(_context);
+                    await projectViewModel.SaveModelAsync(_context);
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -117,7 +118,6 @@ namespace PortfolioMyriam.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(projectViewModel);
         }
