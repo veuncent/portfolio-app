@@ -24,31 +24,45 @@
     </div>
 
     <table class="table spacer-top-half">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.PortfolioItems.First().Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PortfolioItems.First().Description)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
         <tbody>
             @foreach (var item in Model.PortfolioItems)
             {
-                <tr>
+                <tr class="project-portfolio-item spacer-top">
                     <td>
-                        @Html.DisplayFor(modelItem => item.Title)
+                        @if (item.ExternalReference != null && item.ExternalReference.ExternalReferenceType == ExternalReferenceType.IFrame && item.ExternalReference.Uri != null)
+                        {
+                            <div>
+                                @Html.Raw(@item.ExternalReference.Uri)
+                            </div>
+                        }
+                        else
+                        {
+                            <dl>
+                                <dt>
+                                    External Reference:
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => item.ExternalReference.Uri)
+                                </dd>
+                            </dl>
+                        }
                     </td>
                     <td class="description">
+
+                        <h5 style="font-weight: bold;">@Html.DisplayFor(modelItem => item.Title)</h5>
                         @Html.DisplayFor(modelItem => item.Description)
+
+                        @if (User.IsInRole(Roles.Admin))
+                        {
+                            <br />
+                            <br />
+                            <a asp-action="Edit" asp-controller="Portfolio" asp-route-id="@Model.Id">Edit</a>
+                            <a asp-action="Delete" asp-controller="Portfolio" asp-route-id="@Model.Id">Delete</a>
+                        }
+
                     </td>
-                    <td>
-                        <a asp-action="Details" asp-controller="Portfolio" asp-route-id="@item.Id">Details</a>
-                        @await Html.PartialAsync("../Portfolio/AdminEditPartial", item)
-                    </td>
+
+
                 </tr>
             }
         </tbody>
